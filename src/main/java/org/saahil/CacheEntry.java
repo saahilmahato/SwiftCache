@@ -2,13 +2,13 @@ package org.saahil;
 
 public class CacheEntry<V> {
     private final V value;
-    private final long timestamp;
-    private final long ttl;
+    private final long expiryTimeNanos;
 
-    public CacheEntry(V value, long ttl) {
+    public CacheEntry(V value, long ttlNanos) {
         this.value = value;
-        this.timestamp = System.currentTimeMillis();
-        this.ttl = ttl;
+        this.expiryTimeNanos = ttlNanos > 0
+                ? System.nanoTime() + ttlNanos
+                : -1;
     }
 
     public V getValue() {
@@ -16,10 +16,6 @@ public class CacheEntry<V> {
     }
 
     public boolean isExpired() {
-        return ttl > 0 && (System.currentTimeMillis() - timestamp) > ttl;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
+        return expiryTimeNanos != -1 && System.nanoTime() > expiryTimeNanos;
     }
 }
