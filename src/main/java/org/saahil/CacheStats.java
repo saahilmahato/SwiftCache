@@ -1,46 +1,48 @@
 package org.saahil;
 
+import java.util.concurrent.atomic.LongAdder;
+
 public class CacheStats {
-    private long hits = 0;
-    private long misses = 0;
-    private long evictions = 0;
-    private long puts = 0;
+    private final LongAdder hits = new LongAdder();
+    private final LongAdder misses = new LongAdder();
+    private final LongAdder evictions = new LongAdder();
+    private final LongAdder puts = new LongAdder();
 
-    public synchronized void recordHit() {
-        hits++;
+    public void recordHit() {
+        hits.increment();
     }
 
-    public synchronized void recordMiss() {
-        misses++;
+    public void recordMiss() {
+        misses.increment();
     }
 
-    public synchronized void recordEviction() {
-        evictions++;
+    public void recordEviction() {
+        evictions.increment();
     }
 
-    public synchronized void recordPut() {
-        puts++;
+    public void recordPut() {
+        puts.increment();
     }
 
-    public synchronized double getHitRate() {
-        long total = hits + misses;
-        return total == 0 ? 0.0 : (double) hits / total;
+    public double getHitRate() {
+        long total = hits.longValue() + misses.longValue();
+        return total == 0 ? 0.0 : (double) hits.longValue() / total;
     }
 
-    public synchronized long getHits() {
-        return hits;
+    public long getHits() {
+        return hits.longValue();
     }
 
-    public synchronized long getMisses() {
-        return misses;
+    public long getMisses() {
+        return misses.longValue();
     }
 
-    public synchronized long getEvictions() {
-        return evictions;
+    public long getEvictions() {
+        return evictions.longValue();
     }
 
-    public synchronized long getPuts() {
-        return puts;
+    public long getPuts() {
+        return puts.longValue();
     }
 
     @Override
