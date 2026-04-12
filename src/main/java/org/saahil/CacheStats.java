@@ -47,6 +47,12 @@ public class CacheStats {
 
     @Override
     public synchronized String toString() {
-        return String.format("CacheStats{ hits=%d, misses=%d, evictions=%d, puts=%d, hitRate=%.2f }", hits, misses, evictions, puts, getHitRate());
+        return String.format("CacheStats{ hits=%d, misses=%d, evictions=%d, puts=%d, hitRate=%.2f }",
+                hits.longValue(),
+                misses.longValue(),
+                evictions.longValue(),
+                puts.longValue(),
+                getHitRate()
+        );
     }
 }
