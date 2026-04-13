@@ -1,4 +1,7 @@
 package org.saahil.read;
 
-public interface ReadStrategy {
+import org.saahil.SwiftCache;
+
+public interface ReadStrategy<K, V> {
+    V get(K key, SwiftCache<K, V> cache);
 }
