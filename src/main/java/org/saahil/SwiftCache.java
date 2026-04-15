@@ -33,4 +33,8 @@ public class SwiftCache<K, V> {
     public void removeEntry(K key) {
         this.cache.remove(key);
     }
+
+    public void putEntry(K key, V value, Long ttlNanos) {
+        this.cache.put(key, new CacheEntry<V>(value, ttlNanos));
+    }
 }
