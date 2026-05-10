@@ -1,4 +1,4 @@
-package org.saahil;
+package org.saahil.stats;
 
 import java.util.concurrent.atomic.AtomicLong;
 

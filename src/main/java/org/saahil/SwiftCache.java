@@ -1,5 +1,7 @@
 package org.saahil;
 
+import org.saahil.stats.CacheStats;
+
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SwiftCache<K, V> {
