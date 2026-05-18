@@ -29,10 +29,10 @@ public class SwiftCache<K, V> {
 
     public SwiftCache(CacheConfig<K, V> config) {
 
-        this.maxSize = config.getMaxSize();
-        this.readStrategy = config.getReadStrategy();
-        this.writePolicy = config.getWritePolicy();
-        this.evictionPolicy = config.getEvictionPolicy();
+        this.maxSize = config.maxSize();
+        this.readStrategy = config.readStrategy();
+        this.writePolicy = config.writePolicy();
+        this.evictionPolicy = config.evictionPolicy();
         startCleanupTask();
     }
 
@@ -74,10 +74,6 @@ public class SwiftCache<K, V> {
         cleaner.shutdown();
     }
 
-    /*
-        INTERNAL METHODS
-     */
-
     public CacheEntry<V> getInternalEntry(K key) {
         return cache.get(key);
     }
@@ -89,10 +85,6 @@ public class SwiftCache<K, V> {
     public void removeInternal(K key) {
         cache.remove(key);
     }
-
-    /*
-        CLEANUP TASK
-     */
 
     private void startCleanupTask() {
         cleaner.scheduleAtFixedRate(this::cleanupExpiredEntries, 1, 1, TimeUnit.MINUTES);
