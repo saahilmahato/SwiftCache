@@ -11,7 +11,7 @@ public class CacheConfig<K, V> {
     private final ReadStrategy<K, V> readStrategy;
 
     private final WritePolicy<K, V> writePolicy;
-
+ 
     private final EvictionPolicy<K> evictionPolicy;
 
     public CacheConfig(
