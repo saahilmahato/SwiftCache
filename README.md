@@ -88,4 +88,23 @@ cache.put("u:1", "John", java.util.concurrent.TimeUnit.MINUTES.toNanos(5));
 Object value = cache.get("u:1");
 ```
 
-For annotation-based caching, see the classes in `org.saahil.annotation` and examples in `org.saahil.example`.
+### Annotation-Based Use Case with `@Cacheable`
+
+```java
+@CacheStore("users")
+public class UserServiceImpl implements UserService {
+
+    @Cacheable(ttl = 300)
+    @Override
+    public User findById(Long id) {
+        // expensive call (DB/API)
+        return loadUser(id);
+    }
+}
+
+UserService service = CacheableProxy.createProxy(new UserServiceImpl(), UserService.class);
+User user = service.findById(1L); // first call: loads and caches
+User cached = service.findById(1L); // next call: served from cache
+```
+
+For details, see `org.saahil.annotation` and the use-case examples in `org.saahil.example`.
