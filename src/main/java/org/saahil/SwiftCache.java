@@ -3,6 +3,7 @@ package org.saahil;
 import org.saahil.policy.eviction.EvictionPolicy;
 import org.saahil.policy.write.WritePolicy;
 import org.saahil.stats.CacheStats;
+import org.saahil.store.PersistentStore;
 import org.saahil.strategy.read.ReadStrategy;
 
 import java.util.Map;
@@ -25,6 +26,8 @@ public class SwiftCache<K, V> {
 
     private final EvictionPolicy<K> evictionPolicy;
 
+    private final PersistentStore<K, V> persistentStore;
+
     private final ScheduledExecutorService cleaner = Executors.newSingleThreadScheduledExecutor();
 
     public SwiftCache(CacheConfig<K, V> config) {
@@ -33,6 +36,7 @@ public class SwiftCache<K, V> {
         this.readStrategy = config.readStrategy();
         this.writePolicy = config.writePolicy();
         this.evictionPolicy = config.evictionPolicy();
+        this.persistentStore = config.persistentStore();
         startCleanupTask();
     }
 
@@ -53,7 +57,7 @@ public class SwiftCache<K, V> {
             }
         }
 
-        writePolicy.write(key, value, ttlNanos, this);
+        writePolicy.write(key, value, ttlNanos, this, persistentStore);
 
         evictionPolicy.onKeyAccess(key);
     }

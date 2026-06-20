@@ -5,7 +5,7 @@ import org.saahil.SwiftCache;
 import org.saahil.annotation.CacheStore;
 import org.saahil.policy.eviction.FIFOEvictionPolicy;
 import org.saahil.policy.write.WriteThroughPolicy;
-import org.saahil.strategy.read.CacheAsideReadStrategy;
+import org.saahil.strategy.read.ReadOnlyStrategy;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -19,12 +19,14 @@ public class ApplicationCacheStore implements CacheStore {
     }
 
     private void initializeCaches() {
-        // Configure the "users" cache
+        InMemoryStore<String, Object> store = new InMemoryStore<>();
+
         CacheConfig<String, Object> usersCacheConfig = new CacheConfig<>(
-                100,  // max size
-                new CacheAsideReadStrategy<>(),  // read strategy
-                new WriteThroughPolicy<>(),      // write policy
-                new FIFOEvictionPolicy<>()       // eviction policy
+                100,
+                new ReadOnlyStrategy<>(),
+                new WriteThroughPolicy<>(),
+                new FIFOEvictionPolicy<>(),
+                store
         );
 
         SwiftCache<String, Object> usersCache = new SwiftCache<>(usersCacheConfig);
