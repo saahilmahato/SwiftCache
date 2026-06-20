@@ -1,6 +1,7 @@
 package org.saahil.policy.write;
 
 import org.saahil.SwiftCache;
+import org.saahil.store.PersistentStore;
 
 public interface WritePolicy<K, V> {
 
@@ -8,6 +9,7 @@ public interface WritePolicy<K, V> {
             K key,
             V value,
             long ttlNanos,
-            SwiftCache<K, V> cache
+            SwiftCache<K, V> cache,
+            PersistentStore<K, V> store
     );
 }

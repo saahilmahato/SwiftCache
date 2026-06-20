@@ -23,4 +23,15 @@ public class InMemoryStore<K, V> implements PersistentStore<K, V> {
         LOGGER.log(Level.INFO, "[InMemoryStore] Loaded: {0} -> {1}", new Object[]{key, value});
         return value;
     }
+
+    @Override
+    public void delete(K key) {
+        store.remove(key);
+        LOGGER.log(Level.INFO, "[InMemoryStore] Deleted: {0}", key);
+    }
+
+    @Override
+    public boolean exists(K key) {
+        return store.containsKey(key);
+    }
 }

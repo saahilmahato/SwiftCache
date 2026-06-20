@@ -5,9 +5,9 @@ import org.saahil.store.PersistentStore;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-public class WriteThroughPolicy<K, V> implements WritePolicy<K, V> {
+public class WriteAroundPolicy<K, V> implements WritePolicy<K, V> {
 
-    private static final Logger LOGGER = Logger.getLogger(WriteThroughPolicy.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(WriteAroundPolicy.class.getName());
 
     @Override
     public void write(
@@ -17,10 +17,8 @@ public class WriteThroughPolicy<K, V> implements WritePolicy<K, V> {
             SwiftCache<K, V> cache,
             PersistentStore<K, V> store
     ) {
-        LOGGER.log(Level.INFO, "[WriteThroughPolicy] Writing to DB: {0}", key);
+        LOGGER.log(Level.INFO, "[WriteAroundPolicy] Writing to DB (bypassing cache): {0}", key);
         store.save(key, value);
-
-        LOGGER.log(Level.INFO, "[WriteThroughPolicy] Writing to cache: {0}", key);
-        cache.putInternal(key, value, ttlNanos);
     }
 }
+
