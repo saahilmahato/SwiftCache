@@ -58,20 +58,8 @@ public class SwiftCache<K, V> {
         evictionPolicy.onKeyAccess(key);
     }
 
-    public void remove(K key) {
-        cache.remove(key);
-    }
-
     public CacheStats getStats() {
         return stats;
-    }
-
-    public void printStats() {
-        System.out.println(stats);
-    }
-
-    public void shutdown() {
-        cleaner.shutdown();
     }
 
     public CacheEntry<V> getInternalEntry(K key) {

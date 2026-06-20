@@ -22,6 +22,18 @@ public class CacheStats {
         evictions.incrementAndGet();
     }
 
+    public long getHits() {
+        return hits.get();
+    }
+
+    public long getMisses() {
+        return misses.get();
+    }
+
+    public long getEvictions() {
+        return evictions.get();
+    }
+
     @Override
     public String toString() {
 
