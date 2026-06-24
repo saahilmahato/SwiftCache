@@ -23,8 +23,8 @@ public class CacheableMethodInterceptor implements InvocationHandler {
 
         // If method is not annotated with @Cacheable, call the implementation directly
         if (cacheable == null) {
-            Method impl = target.getClass().getMethod(method.getName(), method.getParameterTypes());
-            return impl.invoke(target, args);
+            Method implementationMethod = target.getClass().getMethod(method.getName(), method.getParameterTypes());
+            return implementationMethod.invoke(target, args);
         }
 
         // Get the cache for this annotation
@@ -44,8 +44,8 @@ public class CacheableMethodInterceptor implements InvocationHandler {
         }
 
         // Cache miss - call the actual implementation method on the target
-        Method impl = target.getClass().getMethod(method.getName(), method.getParameterTypes());
-        Object result = impl.invoke(target, args);
+        Method implementationMethod = target.getClass().getMethod(method.getName(), method.getParameterTypes());
+        Object result = implementationMethod.invoke(target, args);
 
         // Cache the result (if not null or if cacheNullValues is true)
         if (result != null || cacheable.cacheNullValues()) {

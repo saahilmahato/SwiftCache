@@ -50,9 +50,9 @@ public class SwiftCache<K, V> {
     public void put(K key, V value, long ttlNanos) {
 
         if (cache.size() >= maxSize) {
-            K evictKey = evictionPolicy.evictKey();
-            if (evictKey != null) {
-                cache.remove(evictKey);
+            K keyToEvict = evictionPolicy.evictKey();
+            if (keyToEvict != null) {
+                cache.remove(keyToEvict);
                 stats.recordEviction();
             }
         }
@@ -66,15 +66,15 @@ public class SwiftCache<K, V> {
         return stats;
     }
 
-    public CacheEntry<V> getInternalEntry(K key) {
+    public CacheEntry<V> getCacheEntry(K key) {
         return cache.get(key);
     }
 
-    public void putInternal(K key, V value, long ttlNanos) {
+    public void putCacheEntry(K key, V value, long ttlNanos) {
         cache.put(key, new CacheEntry<>(value, ttlNanos));
     }
 
-    public void removeInternal(K key) {
+    public void removeCacheEntry(K key) {
         cache.remove(key);
     }
 

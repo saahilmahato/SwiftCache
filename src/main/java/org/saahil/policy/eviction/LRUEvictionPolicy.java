@@ -29,9 +29,9 @@ public class LRUEvictionPolicy<K> implements EvictionPolicy<K> {
 
         K lruKey = accessTimes.entrySet().stream()
                 .min(Comparator.comparingLong(java.util.Map.Entry::getValue))
-                .map(e -> {
-                    accessTimes.remove(e.getKey());
-                    return e.getKey();
+                .map(entry -> {
+                    accessTimes.remove(entry.getKey());
+                    return entry.getKey();
                 })
                 .orElse(null);
 

@@ -27,7 +27,7 @@ public class WriteBackPolicy<K, V> implements WritePolicy<K, V> {
             PersistentStore<K, V> store
     ) {
         LOGGER.log(Level.INFO, "[WriteBackPolicy] Writing to cache immediately: {0}", key);
-        cache.putInternal(key, value, ttlNanos);
+        cache.putCacheEntry(key, value, ttlNanos);
 
         LOGGER.log(Level.INFO, "[WriteBackPolicy] Deferring DB write with delay: {0}ms for key: {1}",
             new Object[]{delayMillis, key});

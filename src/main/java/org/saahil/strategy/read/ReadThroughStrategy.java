@@ -17,7 +17,7 @@ public class ReadThroughStrategy<K, V> implements ReadStrategy<K, V> {
 
     @Override
     public V read(K key, SwiftCache<K, V> cache) {
-        CacheEntry<V> entry = cache.getInternalEntry(key);
+        CacheEntry<V> entry = cache.getCacheEntry(key);
 
         if (entry != null && !entry.isExpired()) {
             cache.getStats().recordHit();
@@ -26,7 +26,7 @@ public class ReadThroughStrategy<K, V> implements ReadStrategy<K, V> {
         }
 
         if (entry != null && entry.isExpired()) {
-            cache.removeInternal(key);
+            cache.removeCacheEntry(key);
         }
 
         cache.getStats().recordMiss();
@@ -36,7 +36,7 @@ public class ReadThroughStrategy<K, V> implements ReadStrategy<K, V> {
 
         if (value != null) {
             LOGGER.log(Level.INFO, "[ReadThroughStrategy] Loaded from DB and populating cache: {0}", key);
-            cache.putInternal(key, value, -1);
+            cache.putCacheEntry(key, value, -1);
         }
 
         return value;

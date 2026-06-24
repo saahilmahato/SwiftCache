@@ -11,7 +11,7 @@ public class ReadOnlyStrategy<K, V> implements ReadStrategy<K, V> {
 
     @Override
     public V read(K key, SwiftCache<K, V> cache) {
-        CacheEntry<V> entry = cache.getInternalEntry(key);
+        CacheEntry<V> entry = cache.getCacheEntry(key);
 
         if (entry == null) {
             cache.getStats().recordMiss();
@@ -20,7 +20,7 @@ public class ReadOnlyStrategy<K, V> implements ReadStrategy<K, V> {
         }
 
         if (entry.isExpired()) {
-            cache.removeInternal(key);
+            cache.removeCacheEntry(key);
             cache.getStats().recordMiss();
             LOGGER.log(Level.INFO, "[ReadOnlyStrategy] EXPIRED for key: {0}", key);
             return null;

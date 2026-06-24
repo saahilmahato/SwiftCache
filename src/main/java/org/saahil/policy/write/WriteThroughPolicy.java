@@ -21,6 +21,6 @@ public class WriteThroughPolicy<K, V> implements WritePolicy<K, V> {
         store.save(key, value);
 
         LOGGER.log(Level.INFO, "[WriteThroughPolicy] Writing to cache: {0}", key);
-        cache.putInternal(key, value, ttlNanos);
+        cache.putCacheEntry(key, value, ttlNanos);
     }
 }
