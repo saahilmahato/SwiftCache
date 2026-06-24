@@ -19,7 +19,7 @@ public class ApplicationCacheStore implements CacheStore {
     }
 
     private void initializeCaches() {
-        InMemoryStore<String, Object> store = new InMemoryStore<>();
+        H2InMemoryStore<String, Object> store = new H2InMemoryStore<>();
 
         CacheConfig<String, Object> usersCacheConfig = new CacheConfig<>(
                 100,

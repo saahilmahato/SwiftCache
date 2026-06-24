@@ -43,7 +43,7 @@ class WriteBackPolicyTest {
     }
 
     private static class CountDownLatchStore<K, V> implements PersistentStore<K, V> {
-        private final InMemoryStore<K, V> delegate = new InMemoryStore<>();
+        private final H2InMemoryStore<K, V> delegate = new H2InMemoryStore<>();
         private final CountDownLatch latch = new CountDownLatch(1);
 
         @Override

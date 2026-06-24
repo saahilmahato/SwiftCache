@@ -1,11 +1,12 @@
 package org.saahil.example;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Example User entity class.
  */
-public class User {
+public class User implements Serializable {
 
     private final Long id;
     private final String name;

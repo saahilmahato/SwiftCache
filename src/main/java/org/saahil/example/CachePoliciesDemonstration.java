@@ -51,7 +51,7 @@ public class CachePoliciesDemonstration {
     }
 
     private static void demonstrateWriteThrough() {
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
         CacheConfig<String, String> config = new CacheConfig<>(
                 10,
                 new ReadOnlyStrategy<>(),
@@ -68,7 +68,7 @@ public class CachePoliciesDemonstration {
     }
 
     private static void demonstrateWriteBack() {
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
         CacheConfig<String, String> config = new CacheConfig<>(
                 10,
                 new ReadOnlyStrategy<>(),
@@ -92,7 +92,7 @@ public class CachePoliciesDemonstration {
     }
 
     private static void demonstrateWriteAround() {
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
         CacheConfig<String, String> config = new CacheConfig<>(
                 10,
                 new ReadOnlyStrategy<>(),
@@ -122,7 +122,7 @@ public class CachePoliciesDemonstration {
 
     private static void demonstrateReadThrough() {
         final String key = "key_b";
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
         store.save(key, "value_b");
 
         CacheConfig<String, String> config = new CacheConfig<>(
@@ -140,7 +140,7 @@ public class CachePoliciesDemonstration {
     }
 
     private static void demonstrateReadOnly() {
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
         store.save("key_c", "value_c");
 
         CacheConfig<String, String> config = new CacheConfig<>(
@@ -170,7 +170,7 @@ public class CachePoliciesDemonstration {
     }
 
     private static void demonstrateFIFO() {
-        InMemoryStore<String, Integer> store = new InMemoryStore<>();
+        H2InMemoryStore<String, Integer> store = new H2InMemoryStore<>();
         CacheConfig<String, Integer> config = new CacheConfig<>(
                 3,
                 new ReadOnlyStrategy<>(),
@@ -190,7 +190,7 @@ public class CachePoliciesDemonstration {
     }
 
     private static void demonstrateLRU() {
-        InMemoryStore<String, Integer> store = new InMemoryStore<>();
+        H2InMemoryStore<String, Integer> store = new H2InMemoryStore<>();
         CacheConfig<String, Integer> config = new CacheConfig<>(
                 3,
                 new ReadOnlyStrategy<>(),
@@ -212,7 +212,7 @@ public class CachePoliciesDemonstration {
     }
 
     private static void demonstrateLFU() {
-        InMemoryStore<String, Integer> store = new InMemoryStore<>();
+        H2InMemoryStore<String, Integer> store = new H2InMemoryStore<>();
         CacheConfig<String, Integer> config = new CacheConfig<>(
                 3,
                 new ReadOnlyStrategy<>(),

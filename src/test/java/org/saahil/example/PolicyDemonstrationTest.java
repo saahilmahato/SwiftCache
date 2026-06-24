@@ -19,7 +19,7 @@ class PolicyDemonstrationTest {
 
     @Test
     void testWriteThroughPolicyWritesToBothCacheAndDB() {
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
 
         CacheConfig<String, String> config = new CacheConfig<>(
                 10,
@@ -39,7 +39,7 @@ class PolicyDemonstrationTest {
 
     @Test
     void testWriteAroundPolicyBypassesCache() {
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
 
         CacheConfig<String, String> config = new CacheConfig<>(
                 10,
@@ -59,7 +59,7 @@ class PolicyDemonstrationTest {
 
     @Test
     void testReadThroughStrategyLoadsFromDBOnMiss() {
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
         store.save("user:5", "Alice Smith");
 
         CacheConfig<String, String> config = new CacheConfig<>(
@@ -78,7 +78,7 @@ class PolicyDemonstrationTest {
 
     @Test
     void testReadOnlyStrategyNeverLoadsFromDB() {
-        InMemoryStore<String, String> store = new InMemoryStore<>();
+        H2InMemoryStore<String, String> store = new H2InMemoryStore<>();
         store.save("user:10", "Bob Wilson");
 
         CacheConfig<String, String> config = new CacheConfig<>(
@@ -97,7 +97,7 @@ class PolicyDemonstrationTest {
 
     @Test
     void testLRUEvictionPolicy() {
-        InMemoryStore<String, Integer> store = new InMemoryStore<>();
+        H2InMemoryStore<String, Integer> store = new H2InMemoryStore<>();
 
         CacheConfig<String, Integer> config = new CacheConfig<>(
                 3,
@@ -122,7 +122,7 @@ class PolicyDemonstrationTest {
 
     @Test
     void testLFUEvictionPolicy() {
-        InMemoryStore<String, Integer> store = new InMemoryStore<>();
+        H2InMemoryStore<String, Integer> store = new H2InMemoryStore<>();
 
         CacheConfig<String, Integer> config = new CacheConfig<>(
                 3,
